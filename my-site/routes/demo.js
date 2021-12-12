@@ -154,7 +154,8 @@ router.get('/transaction', function (req, res) {
   if (!res.locals.isAuth) {
     return res.status(401).render('401');
   }
-  res.render('transaction');
+  const csrfToken = req.csrfToken();                                                  // create csrf token for that route 
+  res.render('transaction', {csrfToken: csrfToken});                                   // send the token into the template
 });
 
 router.post('/transaction', async function(req, res) {
